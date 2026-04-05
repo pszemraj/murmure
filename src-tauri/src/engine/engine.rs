@@ -30,9 +30,9 @@ impl Drop for ParakeetModel {
 
 impl ParakeetModel {
     pub fn new<P: AsRef<Path>>(model_dir: P, quantized: bool) -> Result<Self, ParakeetError> {
-        let encoder = Self::init_session(&model_dir, "encoder-model", None, quantized)?;
-        let decoder_joint = Self::init_session(&model_dir, "decoder_joint-model", None, quantized)?;
-        let preprocessor = Self::init_session(&model_dir, "nemo128", None, false)?;
+        let encoder = Self::init_session(&model_dir, "encoder-model", Some(2), quantized)?;
+        let decoder_joint = Self::init_session(&model_dir, "decoder_joint-model", Some(2), quantized)?;
+        let preprocessor = Self::init_session(&model_dir, "nemo128", Some(2), false)?;
 
         let (vocab, blank_idx) = Self::load_vocab(&model_dir)?;
         let vocab_size = vocab.len();
