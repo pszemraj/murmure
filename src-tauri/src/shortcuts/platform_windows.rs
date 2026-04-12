@@ -22,7 +22,7 @@ pub fn init(app: AppHandle) {
         loop {
             let shortcut_state = app.state::<ShortcutState>();
             if shortcut_state.is_suspended() {
-                std::thread::sleep(Duration::from_millis(32));
+                std::thread::sleep(Duration::from_millis(100));
                 continue;
             }
 
@@ -85,7 +85,7 @@ pub fn init(app: AppHandle) {
                 }
             }
 
-            std::thread::sleep(Duration::from_millis(32));
+            std::thread::sleep(Duration::from_millis(100));
         }
     });
 }
