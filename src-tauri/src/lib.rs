@@ -21,7 +21,8 @@ mod utils;
 mod wake_word;
 
 use crate::shortcuts::init_shortcuts;
-use audio::preload_engine;
+// DIAGNOSTIC (issue #290): preload disabled to isolate idle-CPU cause
+// use audio::preload_engine;
 use audio::types::AudioState;
 use commands::*;
 use dictionary::Dictionary;
@@ -178,10 +179,12 @@ pub fn run() {
             app.manage(HttpApiState::new());
             app.manage(SmartMicState::new());
 
-            match preload_engine(app.handle()) {
-                Ok(_) => info!("Transcription engine initialized and ready"),
-                Err(e) => info!("Transcription engine will be loaded on first use: {}", e),
-            }
+            // DIAGNOSTIC (issue #290): preload_engine disabled to isolate idle-CPU cause.
+            // match preload_engine(app.handle()) {
+            //     Ok(_) => info!("Transcription engine initialized and ready"),
+            //     Err(e) => info!("Transcription engine will be loaded on first use: {}", e),
+            // }
+            info!("Transcription engine preload DISABLED (diagnostic)");
 
             setup_tray(app.handle())?;
 
