@@ -107,7 +107,7 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_process::init())
-        .device_event_filter(DeviceEventFilter::Never)
+        .device_event_filter(DeviceEventFilter::Always)
         .setup(|app| {
             let is_autostart = std::env::args().any(|arg| arg == "--autostart");
             if is_autostart {
